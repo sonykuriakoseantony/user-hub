@@ -1,0 +1,163 @@
+<div class="min-h-screen bg-background">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-30 border-b border-border bg-card">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+
+      <!-- Left -->
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-blue-400/10 flex items-center justify-center">
+          <i class="fa-solid fa-users text-blue-500/90"></i>
+        </div>
+
+        <span class="font-semibold text-lg tracking-tight text-foreground">
+          {{ appTitle }}
+        </span>
+      </div>
+
+      <!-- Right -->
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline text-sm text-muted-foreground">
+          {{ userEmail }}
+        </span>
+
+        <button (click)="signOut()" class="h-9 px-3 rounded-md text-sm font-medium transition
+                 hover:bg-blue-400/15 hover:text-accent-foreground
+                 focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer">
+
+          <i class="fa-solid fa-power-off text-blue-500/90"></i>
+
+          Sign out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <div class="space-y-6">
+
+      <!-- Title -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-foreground">
+            Users
+          </h1>
+          <p class="text-sm text-muted-foreground mt-1">
+            Manage your user records
+          </p>
+          <!-- User count -->
+          <p class="text-xs text-muted-foreground mt-4">
+            {{ userCount }} users total
+          </p>
+        </div>
+
+        <a routerLink="/user/add"
+          class="h-10 px-4 rounded-md bg-blue-500/90 text-white
+                 text-sm font-medium transition duration-300 hover:bg-blue-600/90 inline-flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+          <i class="fa-solid fa-plus"></i>
+
+          Add User
+        </a>
+      </div>
+
+      <!-- Empty State -->
+      @if (userCount == 0) {
+      <div class="rounded-xl border border-border bg-card overflow-hidden">
+        <div class="p-12 text-center space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-muted-foreground" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+
+          <p class="text-muted-foreground">
+            No users yet. Add your first user!
+          </p>
+        </div>
+      </div>
+      }
+      @else {
+      <div class="rounded-xl border border-gray-200 bg-card overflow-hidden">
+        <div class="relative w-full overflow-auto">
+          <table class="w-full text-sm border-collapse">
+
+            <!-- Header -->
+            <thead>
+              <tr class="border-b border-gray-200 bg-slate-200/50">
+                <th class="h-12 px-4 text-left font-semibold text-muted-foreground">
+                  Name
+                </th>
+                <th class="h-12 px-4 text-left font-semibold text-muted-foreground">
+                  Email
+                </th>
+                <th class="h-12 px-4 text-left font-semibold text-muted-foreground">
+                  Mobile
+                </th>
+                <th class="h-12 px-4 text-left font-semibold text-muted-foreground">
+                  Age
+                </th>
+                <th class="h-12 px-4 text-right font-semibold text-muted-foreground">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+
+            <!-- Body -->
+            <tbody>
+              <tr *ngFor="let user of allUsers()" class="border-b border-gray-200 hover:bg-slate-100/30 transition group">
+
+                <td class="p-4 font-medium">
+                  {{ user.name }}
+                </td>
+
+                <td class="p-4 text-slate-500">
+                  {{ user.email }}
+                </td>
+
+                <td class="p-4 font-mono text-sm">
+                  {{ user.mobile }}
+                </td>
+
+                <td class="p-4">
+                  <span class="inline-flex items-center rounded-full px-2.5 py-0.5
+                     text-xs font-bold bg-slate-300/50 text-slate-700">
+                    {{ user.age }}
+                  </span>
+                </td>
+
+                <!-- Actions -->
+                <td class="p-4 text-right">
+                  <div class="flex justify-end gap-1">
+
+                    <!-- Edit -->
+                    <a routerLink="/user/edit/{{user._id}}" class="h-9 px-3 rounded-md text-sm font-medium cursor-pointer inline-flex items-center justify-center
+                       text-blue-500/90 hover:bg-blue-50
+                       focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <i class="fas fa-user-pen"></i>
+                    </a>
+
+                    <!-- Delete -->
+                    <button (click)="deleteUser(user._id)" class="h-9 px-3 rounded-md text-sm font-medium cursor-pointer
+                       text-red-600 hover:bg-red-50
+                       focus:outline-none focus:ring-2 focus:ring-red-500">
+                      <i class="fa-regular fa-trash-can"></i>
+                    </button>
+
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      }
+    </div>
+  </main>
+
+</div>

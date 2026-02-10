@@ -1,0 +1,75 @@
+<div class="min-h-screen flex items-center justify-center bg-background px-4">
+  <div class="w-full max-w-md space-y-8">
+
+    <!-- Header -->
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-blue-400/10 mb-2">
+        <!-- users icon -->
+        <i class="fa-solid fa-users-gear text-blue-500/90 text-4xl"></i>
+      </div>
+
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">
+        User Manager
+      </h1>
+      <p class="text-muted-foreground">
+        Manage your users with ease
+      </p>
+    </div>
+
+    <!-- Card -->
+    <div class="rounded-lg border border-slate-300 bg-card text-card-foreground shadow-md">
+      <div class="p-6 pb-4">
+        <h3 class="text-xl font-semibold">Sign in</h3>
+        <p class="text-sm text-muted-foreground">
+          Enter your credentials to continue
+        </p>
+      </div>
+
+      <div class="p-6 pt-0">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+          <!-- Email -->
+          <div class="space-y-2">
+            <label class="text-sm font-medium" for="email">Email</label>
+            <div class="relative">
+              <i class="fa-regular fa-envelope text-blue-500/90 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="you@example.com"
+                class="h-10 w-full rounded-md border border-gray-300 bg-background px-3 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="space-y-2">
+            <label class="text-sm font-medium" for="password">Password</label>
+            <div class="relative">
+              <i class="fa-solid fa-lock text-blue-500/90 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                placeholder="••••••••"
+                class="h-10 w-full rounded-md border border-gray-300 bg-primary px-3 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+            </div>
+          </div>
+
+          <!-- Button -->
+          <button
+            type="submit"
+            class="w-full h-10 rounded-md bg-blue-500/90 text-white text-sm font-medium hover:bg-blue-600/90 transition duration-300 cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed"
+            [disabled]="loginForm.invalid">
+            Sign In
+          </button>
+
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+</div>

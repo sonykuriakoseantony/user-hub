@@ -1,0 +1,134 @@
+<main class="min-h-screen bg-background">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-30 border-b border-border bg-card">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+
+            <!-- Left -->
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-blue-400/10 flex items-center justify-center">
+                    <i class="fa-solid fa-users text-blue-500/90"></i>
+                </div>
+
+                <span class="font-semibold text-lg tracking-tight text-foreground">
+                    {{ appTitle }}
+                </span>
+            </div>
+
+            <!-- Right -->
+            <div class="flex items-center gap-3">
+                <span class="hidden sm:inline text-sm text-muted-foreground">
+                    {{ userEmail }}
+                </span>
+
+                <button (click)="signOut()" class="h-9 px-3 rounded-md text-sm font-medium transition
+                 hover:bg-blue-400/15 hover:text-accent-foreground
+                 focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer">
+
+                    <i class="fa-solid fa-power-off text-blue-500/90"></i>
+
+                    Sign out
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+        <div class="space-y-6">
+
+            <!-- Title -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold tracking-tight text-foreground">
+                        Users
+                    </h1>
+                    <p class="text-sm text-muted-foreground mt-1">
+                        Manage your user records
+                    </p>
+                </div>
+                <a routerLink="/dashboard" class="text-sm text-blue-500 hover:underline">Back to Dashboard</a>
+            </div>
+
+            <!-- User Form -->
+            <div class="bg-background flex items-center justify-center px-4 py-8">
+                <div class="w-full max-w-xl bg-card border border-slate-300 rounded-lg shadow-lg p-6 space-y-6">
+
+                    <!-- Header -->
+                    <div class="space-y-1 text-center sm:text-left">
+                        <h2 class="text-lg font-semibold tracking-tight text-foreground">
+                            @if(userId){
+                                Edit
+                            } @else{
+                                Add 
+                            }
+                            User
+                        </h2>
+                        <p class="text-sm text-muted-foreground">
+                            Fill in the details to @if(userId){
+                                update a
+                            } @else{
+                                add a new
+                            } user.
+                        </p>
+                    </div>
+
+                    <!-- Form -->
+                    <form class="space-y-4">
+
+                        <!-- Name -->
+                        <div class="space-y-1.5">
+                            <label for="name" class="text-sm font-medium">Name</label>
+                            <input id="name" type="text" [(ngModel)]="userDetails().name" name="name" placeholder="John Doe"
+                                class="h-10 w-full rounded-md border border-gray-200 bg-background px-3 text-sm
+                 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="space-y-1.5">
+                            <label for="email" class="text-sm font-medium">Email</label>
+                            <input id="email" type="email" [(ngModel)]="userDetails().email" name="email"
+                                placeholder="john@example.com" class="h-10 w-full rounded-md border border-gray-200 bg-background px-3 text-sm
+                 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <!-- Mobile -->
+                        <div class="space-y-1.5">
+                            <label for="mobile" class="text-sm font-medium">Mobile</label>
+                            <input id="mobile" type="text" [(ngModel)]="userDetails().mobile" name="mobile"
+                                placeholder="+1 234 567 890" class="h-10 w-full rounded-md border border-gray-200 bg-background px-3 text-sm
+                 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <!-- Age -->
+                        <div class="space-y-1.5">
+                            <label for="age" class="text-sm font-medium">Age</label>
+                            <input id="age" type="number" [(ngModel)]="userDetails().age" name="age" placeholder="25" class="h-10 w-full rounded-md border border-gray-200 bg-background px-3 text-sm
+                 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex justify-end gap-2 pt-2">
+                            <!-- <button type="button" (click)="cancel()" class="h-10 px-4 rounded-md border text-sm font-medium
+                 hover:bg-accent transition">
+                                Cancel
+                            </button> -->
+
+                            @if (userId) {
+                                <button (click)="updateUser()" type="submit" class="cursor-pointer h-10 px-4 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
+                                Update User
+                            </button>
+                            }@else {
+                                <button (click)="addUser()" type="submit" class="cursor-pointer h-10 px-4 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition">
+                                Add User
+                            </button>
+                            }
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
