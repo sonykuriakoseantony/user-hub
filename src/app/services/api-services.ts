@@ -6,7 +6,8 @@ import { UserModel } from '../models/userModel';
   providedIn: 'root',
 })
 export class ApiServices {
-  server_url = 'http://localhost:3000';
+  // server_url = 'http://localhost:3000';
+  server_url = 'https://user-hub-server.onrender.com';
   http = inject(HttpClient);
 
   addUserAPI(reqBody : UserModel){
